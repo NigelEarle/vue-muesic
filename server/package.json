@@ -1,0 +1,16 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^4.16.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-react": "^7.5.1",
+    "eslint-plugin-vue": "^4.2.0"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
