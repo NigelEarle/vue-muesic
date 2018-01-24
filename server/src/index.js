@@ -11,9 +11,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
-app.get('/status', (req, res) => {
-  return res.send('The status');
-})
+app.use('/auth', require('./routes/auth'));
 
 app.listen(PORT, () => {
   `Server listening on port: ${PORT}`;
