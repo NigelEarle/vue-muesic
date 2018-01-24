@@ -13,31 +13,35 @@
       v-model="password"
       placeholder="Password">
     <br>
-    <button>Register</button>
+    <button
+      @click="register">
+      Register
+    </button>
 
   </div>
 </template>
 
 <script>
+import AuthService from '@/services/auth';
+
 export default {
   name: 'Register',
   data() {
     return {
-      email: 'abc',
-      password: '123',
+      email: '',
+      password: '',
     };
   },
-  watch: {
-    email(value) {
-
+  methods: {
+    async register() {
+      const { email, password } = this;
+      try {
+        const response = await AuthService.register({ email, password });
+        console.log(response);
+      } catch (err) {
+        console.error(err);
+      }
     },
-    password(value) {
-    },
-  },
-  mounted() {
-    setTimeout(() => {
-      this.email = 'bound to input';
-    }, 2000);
   },
 };
 </script>
