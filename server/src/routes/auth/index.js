@@ -1,8 +1,9 @@
 const express = require('express');
 const knex = require('../../../knex/knex');
+const { credentialsValidation } = require('../../policies');
 const router = express.Router();
 
-router.post('/register', async (req, res) => {
+router.post('/register', credentialsValidation, async (req, res) => {
   const { body } = req;
   try {
     const result = await knex.table('users').insert(body);
