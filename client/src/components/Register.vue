@@ -1,5 +1,4 @@
 <template>
-
   <v-layout cloumns>
     <v-flex xs6 offset-xs3>
       <div class="white elevation-2">
@@ -7,18 +6,16 @@
           <v-toolbar-title>Register</v-toolbar-title>
         </v-toolbar>
         <div class="pl-4 pr-4 pt-2 pb-2">
-          <input
-            type="text"
-            name="email"
+
+          <v-text-field
+            label="Email"
             v-model="email"
-            placeholder="Email">
-          <br>
-          <input
-            type="password"
+          ></v-text-field>
+          <v-text-field
             name="password"
+            label="Password"
             v-model="password"
-            placeholder="Password">
-          <br>
+          ></v-text-field>
           <div class="error" v-html="err"/>
           <br>
           <v-btn class="cyan"
