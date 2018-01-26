@@ -2,6 +2,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const knex = require('../../../knex/knex');
 const config = require('../../config/config');
+const { hashPassword, comparePassword } = require('../../helpers/hash');
 
 const { credentialsValidation } = require('../../policies');
 const router = express.Router();
@@ -18,6 +19,8 @@ const jwtSignUser = (user) => {
 router.post('/register', credentialsValidation, async (req, res) => {
   const { body } = req;
   try {
+    const hash = await hashPassword(body.password);
+    body.password = hash;
     const result = await knex('users').insert(body);
     return res.status(201).send(result);
   } catch (err) {
@@ -35,7 +38,7 @@ router.post('/login', async (req, res) => {
       return res.status(403).send('Incorrect credentials');
     }
 
-    const isValidPassword = (body.password === user.password);
+    const isValidPassword = await comparePassword(body.password, user.password)
 
     if (!isValidPassword) {
       return res.status(403).send('Incorrect credentials');

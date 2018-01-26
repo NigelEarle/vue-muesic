@@ -9,8 +9,7 @@ const credentialsValidation = (req, res, next) => {
   }
 
   const { err, value } = Joi.validate(req.body, schema);
-
-  console.log(err, value, schema.email)
+  
   if (err) {
     switch(err.details[0].context.key) {
       case 'email': {
