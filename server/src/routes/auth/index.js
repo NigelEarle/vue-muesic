@@ -1,7 +1,19 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const knex = require('../../../knex/knex');
+const config = require('../../config/config');
+
 const { credentialsValidation } = require('../../policies');
 const router = express.Router();
+
+const ONE_WEEK = 60 * 60 * 24 * 7;
+const jwtSignUser = (user) => {
+  const userObject = JSON.parse(JSON.stringify(user))
+
+  return jwt.sign(userObject, config.jwtSecret, {
+    expiresIn: ONE_WEEK,
+  });
+}
 
 router.post('/register', credentialsValidation, async (req, res) => {
   const { body } = req;
@@ -17,7 +29,8 @@ router.post('/register', credentialsValidation, async (req, res) => {
 router.post('/login', async (req, res) => {
   const { body } = req;
   try {
-    const [user] = await knex('users').where({ email: body.email }).select();
+    const [ user ] = await knex('users').where({ email: body.email }).select();
+
     if (!user) {
       return res.status(403).send('Incorrect credentials');
     }
@@ -28,8 +41,12 @@ router.post('/login', async (req, res) => {
       return res.status(403).send('Incorrect credentials');
     }
 
-    return res.status(200).send(user);
+    return res.status(200).send({
+      user,
+      token: jwtSignUser(user)
+    });
   } catch (err) {
+    console.log(err)
     return res.status(500).send('Error occurred with login')
   }
 });
