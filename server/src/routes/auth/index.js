@@ -21,9 +21,15 @@ router.post('/register', credentialsValidation, async (req, res) => {
   try {
     const hash = await hashPassword(body.password);
     body.password = hash;
-    const result = await knex('users').insert(body);
-    return res.status(201).send(result);
+
+    const user = await knex('users').insert(body).returning('*');
+
+    return res.status(201).send({
+      user,
+      token: jwtSignUser(user)
+    });
   } catch (err) {
+
     return res.status(400).send(err);
   }
 
