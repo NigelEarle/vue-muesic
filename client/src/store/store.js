@@ -15,8 +15,8 @@ export default new Vuex.Store({
       state.token = token;
     },
     setUser(state, user) {
-      state.user = user
-    }
+      state.user = user;
+    },
   },
   actions: {
     setToken({ commit }, token) {
@@ -24,6 +24,6 @@ export default new Vuex.Store({
     },
     setUser({ commit }, user) {
       commit('setUser', user);
-    }
+    },
   },
 });

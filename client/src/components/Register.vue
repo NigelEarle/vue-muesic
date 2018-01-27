@@ -52,7 +52,9 @@ export default {
       const { email, password } = this;
       try {
         const response = await AuthService.register({ email, password });
-        console.log(response);
+        this.$store.dispatch('setToken', response.data.token);
+        this.$store.dispatch('setUser', response.data.user);
+
       } catch (err) {
         this.err = err.response.data.error;
       }
