@@ -7,11 +7,14 @@
         Vue Muesic
       </span>
     </v-toolbar-title>
-    <!-- <v-toolbar-items>
-      <v-btn flat dark>
+    <v-toolbar-items>
+      <v-btn
+        @click="navigateTo({name: 'songs'})"
+        flat
+        dark>
         Browse
       </v-btn>
-    </v-toolbar-items> -->
+    </v-toolbar-items>
 
     <v-spacer></v-spacer>
 
