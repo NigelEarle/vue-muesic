@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use('/auth', require('./routes/auth'));
+app.use('/songs', require('./routes/songs'));
 
 app.listen(PORT, () => {
   `Server listening on port: ${PORT}`;
