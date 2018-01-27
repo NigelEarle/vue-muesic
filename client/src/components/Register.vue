@@ -6,16 +6,19 @@
           <v-toolbar-title>Register</v-toolbar-title>
         </v-toolbar>
         <div class="pl-4 pr-4 pt-2 pb-2">
-
-          <v-text-field
-            label="Email"
-            v-model="email"
-          ></v-text-field>
-          <v-text-field
-            name="password"
-            label="Password"
-            v-model="password"
-          ></v-text-field>
+          <form name="vue-music-form" autocomplete="off">
+            <v-text-field
+              label="Email"
+              v-model="email"
+            ></v-text-field>
+            <v-text-field
+              name="password"
+              label="Password"
+              type="password"
+              v-model="password"
+              autocomplete="new-password"
+            ></v-text-field>
+          </form>
           <div class="error" v-html="err"/>
           <br>
           <v-btn class="cyan"

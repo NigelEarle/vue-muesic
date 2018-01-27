@@ -14,6 +14,7 @@
           <v-text-field
             name="password"
             label="Password"
+            type="password"
             v-model="password"
           ></v-text-field>
           <div class="error" v-html="err"/>
@@ -49,7 +50,8 @@ export default {
       const { email, password } = this;
       try {
         const response = await AuthService.login({ email, password });
-        console.log(response);
+        this.$store.dispatch('setToken', response.data.token);
+        this.$store.dispatch('setUser', response.data.user);
       } catch (err) {
         this.err = err.response.data.error;
       }

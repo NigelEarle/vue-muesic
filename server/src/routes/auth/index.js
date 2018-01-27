@@ -9,11 +9,13 @@ const router = express.Router();
 
 const ONE_WEEK = 60 * 60 * 24 * 7;
 const jwtSignUser = (user) => {
-  const userObject = JSON.parse(JSON.stringify(user))
+    const userObject = JSON.parse(JSON.stringify(user))
 
-  return jwt.sign(userObject, config.jwtSecret, {
-    expiresIn: ONE_WEEK,
-  });
+    const token = jwt.sign(userObject, config.jwtSecret, {
+      expiresIn: ONE_WEEK,
+    });
+
+    return Promise.resolve(token);
 }
 
 router.post('/register', credentialsValidation, async (req, res) => {
@@ -22,12 +24,10 @@ router.post('/register', credentialsValidation, async (req, res) => {
     const hash = await hashPassword(body.password);
     body.password = hash;
 
-    const user = await knex('users').insert(body).returning('*');
+    const [ user ] = await knex('users').insert(body).returning('*');
 
-    return res.status(201).send({
-      user,
-      token: jwtSignUser(user)
-    });
+    const token = await jwtSignUser(user);
+    return res.status(201).send({ user, token });
   } catch (err) {
 
     return res.status(400).send(err);
@@ -50,10 +50,8 @@ router.post('/login', async (req, res) => {
       return res.status(403).send('Incorrect credentials');
     }
 
-    return res.status(200).send({
-      user,
-      token: jwtSignUser(user)
-    });
+    const token = await jwtSignUser(user);
+    return res.status(200).send({ user, token });
   } catch (err) {
     console.log(err)
     return res.status(500).send('Error occurred with login')
