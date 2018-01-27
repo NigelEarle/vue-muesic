@@ -32,6 +32,13 @@
         dark>
         Sign Up
       </v-btn>
+      <v-btn
+        @click="logout"
+        v-if="$store.state.isUserLoggedIn"
+        flat
+        dark>
+        Log Out
+      </v-btn>
     </v-toolbar-items>
    </v-toolbar>
 </template>
@@ -43,6 +50,13 @@ export default {
   methods: {
     navigateTo(route) {
       this.$router.push(route);
+    },
+    logout() {
+      this.$store.dispatch('setToken', null);
+      this.$store.dispatch('setUser', null);
+      this.$router.push({
+        name: 'home',
+      });
     },
   },
 };
