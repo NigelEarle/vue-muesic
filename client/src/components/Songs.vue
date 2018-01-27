@@ -1,7 +1,8 @@
 <template>
   <v-layout cloumns>
     <v-flex xs6 offset-xs3>
-      <panel/>
+      <panel title="Songs">
+      </panel>
     </v-flex>
   </v-layout>
 </template>
