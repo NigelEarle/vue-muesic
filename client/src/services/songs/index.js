@@ -5,4 +5,8 @@ export default {
     return api().get('songs');
   },
 
+  createSong(data) {
+    return api().post('songs', data);
+  },
+
 };
