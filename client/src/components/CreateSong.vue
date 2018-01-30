@@ -57,6 +57,9 @@
           v-model="song.lyrics"
         ></v-text-field>
       </panel>
+      <div class="danger-alert" v-if="error">
+        {{error}}
+      </div>
       <v-btn class="cyan"
         @click="create">
         Create
@@ -81,6 +84,7 @@ export default {
         lyrics: null,
         tab: null,
       },
+      error: null,
     };
   },
   components: {
@@ -88,6 +92,13 @@ export default {
   },
   methods: {
     async create() {
+      const fieldValidation = Object.keys(this.song)
+        .every(key => !!this.song[key]);
+
+      if (!fieldValidation) {
+        this.error = 'Please fill in all fields';
+        return;
+      }
       try {
         await SongsService.createSong(this.song);
         this.$router.push({
