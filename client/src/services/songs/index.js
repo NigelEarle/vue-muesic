@@ -1,9 +1,8 @@
 import api from '../api';
 
-
 export default {
-  fetchSongs(credentials) {
-    return api().post('songs', credentials);
+  fetchAllSongs() {
+    return api().get('songs');
   },
 
 };

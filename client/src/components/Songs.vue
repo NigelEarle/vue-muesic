@@ -27,7 +27,8 @@ export default {
     Panel,
   },
   async mounted() {
-    this.songs = await SongsService.fetchAllSongs();
+    const { data } = await SongsService.fetchAllSongs();
+    this.songs = data;
   },
 };
 </script>
