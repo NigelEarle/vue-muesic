@@ -4,26 +4,38 @@
       <panel title="Song Metadata">
         <v-text-field
           label="Tile"
+          :rules="[value => !!value || 'Required']"
+          required
           v-model="song.title"
         ></v-text-field>
         <v-text-field
           label="Artist"
+          :rules="[value => !!value || 'Required']"
+          required
           v-model="song.artist"
         ></v-text-field>
         <v-text-field
           label="Genre"
+          :rules="[value => !!value || 'Required']"
+          required
           v-model="song.genre"
         ></v-text-field>
         <v-text-field
           label="Album"
+          :rules="[value => !!value || 'Required']"
+          required
           v-model="song.album"
         ></v-text-field>
         <v-text-field
           label="Album Image URL"
+          :rules="[value => !!value || 'Required']"
+          required
           v-model="song.albumImageUrl"
         ></v-text-field>
         <v-text-field
           label="YouTube ID"
+          :rules="[value => !!value || 'Required']"
+          required
           v-model="song.youtubeId"
         ></v-text-field>
       </panel>
@@ -33,11 +45,15 @@
         <v-text-field
           label="Tab"
           multi-line
+          :rules="[value => !!value || 'Required']"
+          required
           v-model="song.tab"
         ></v-text-field>
         <v-text-field
           label="Lyrics"
           multi-line
+          :rules="[value => !!value || 'Required']"
+          required
           v-model="song.lyrics"
         ></v-text-field>
       </panel>
@@ -72,9 +88,11 @@ export default {
   },
   methods: {
     async create() {
-      try{
-        const { data } = await SongsService.createSong(this.song);
-        console.log(data);
+      try {
+        await SongsService.createSong(this.song);
+        this.$router.push({
+          name: 'songs',
+        });
       } catch (err) {
         console.log(err);
       }
