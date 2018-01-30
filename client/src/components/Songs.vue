@@ -14,11 +14,35 @@
           <v-icon>add</v-icon>
         </v-btn>
         <div
+          class="song"
           v-for="song in songs"
           :key="song.id">
-          {{song.title}}
-          {{song.artist}}
-          {{song.album}}
+          <v-layout>
+            <v-flex xs6>
+              <div class="song-title">
+                {{song.title}}
+              </div>
+              <div class="song-artist">
+                {{song.artist}}
+              </div>
+              <div class="song-genre">
+                {{song.genre}}
+              </div>
+            </v-flex>
+            <v-flex xs6>
+              <img :src="song.albumImageUrl" alt="" class="album-image">
+            </v-flex>
+
+            <v-btn class="cyan"
+              @click="navigateTo({
+                name: 'song',
+                params: {
+                  songId: song.id
+                }
+              })">
+              View
+            </v-btn>
+          </v-layout>
         </div>
       </panel>
     </v-flex>
@@ -37,7 +61,7 @@ export default {
   methods: {
     navigateTo(route) {
       this.$router.push(route);
-    }
+    },
   },
   components: {
     Panel,
@@ -48,4 +72,27 @@ export default {
   },
 };
 </script>
-<style scoped></style>
+<style scoped>
+
+.song {
+  padding: 20px;
+  height: 330px;
+  overflow: hidden;
+}
+.song-title {
+  font-size: 30px;
+}
+.song-artist {
+  font-size: 24px;
+}
+.song-genre {
+  font-size: 18px;
+}
+
+.album-image {
+  width: 70%;
+  margin: 0 auto;
+}
+
+
+</style>
