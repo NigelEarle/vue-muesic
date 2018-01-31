@@ -1,8 +1,8 @@
 <template>
-  <panel title="Lyrics">
+  <panel title="Tab">
     <textarea
     readonly
-    v-model="song.lyrics"
+    v-model="song.tab"
     >
     </textarea>
   </panel>
