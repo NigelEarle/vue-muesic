@@ -20,4 +20,15 @@ router.route('/')
     }
   });
 
+router.route('/:id')
+  .get(async (req, res) => {
+    const { id } = req.params;
+    try {
+      const song = await knex('songs').where('id', id)
+      return res.status(200).send(song);
+    } catch (err) {
+      return res.status(500).send(err);
+    }
+  })
+
 module.exports = router;

@@ -9,4 +9,8 @@ export default {
     return api().post('songs', data);
   },
 
+  fetchSong(id) {
+    return api().get(`songs/${id}`);
+  },
+
 };
