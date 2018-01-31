@@ -23,7 +23,11 @@
     </v-flex>
     <v-flex xs6 class="ml-2">
       <panel title="tabs">
-        {{song.tab}}
+        <textarea
+        readonly
+        v-model="song.tab"
+        >
+        </textarea>
       </panel>
     </v-flex>
   </v-layout>
@@ -72,4 +76,16 @@ export default {
   width: 70%;
   margin: 0 auto;
 }
+
+textarea {
+  width: 100%;
+  font-family: monospace;
+  border: none;
+  height: 600px;
+  border-style:none;
+  border-color: transparent;
+  overflow: auto;
+  padding: 40px;
+}
+
 </style>
