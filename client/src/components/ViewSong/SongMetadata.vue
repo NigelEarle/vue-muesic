@@ -42,8 +42,8 @@ export default {
   },
   methods: {
     navigateTo(route) {
-      this.$route.push(route);
-    }
+      this.$router.push(route);
+    },
   },
 };
 </script>

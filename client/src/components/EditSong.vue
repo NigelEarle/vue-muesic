@@ -61,8 +61,8 @@
         {{error}}
       </div>
       <v-btn class="cyan"
-        @click="create">
-        Create
+        @click="save">
+        save
       </v-btn>
     </v-flex>
   </v-layout>
@@ -91,23 +91,37 @@ export default {
     Panel,
   },
   methods: {
-    async create() {
-      const fieldValidation = Object.keys(this.song)
+    async save() {
+      this.error = null;
+      const validateFields = Object.keys(this.song)
         .every(key => !!this.song[key]);
-
-      if (!fieldValidation) {
-        this.error = 'Please fill in all fields';
+      if (!validateFields) {
+        this.error = 'Please validate all fields';
         return;
       }
+      const songId = this.$store.state.route.params.songId;
+
       try {
-        await SongsService.createSong(this.song);
+        await SongsService.editSong(this.song);
         this.$router.push({
           name: 'songs',
+          params: {
+            songId,
+          },
         });
       } catch (err) {
         console.log(err);
       }
     },
+  },
+  async mounted() {
+    try {
+      const songId = this.$store.state.route.params.songId;
+      const { data: [song] } = await SongsService.fetchSong(songId);
+      this.song = song;
+    } catch (err) {
+      this.error = err;
+    }
   },
 };
 </script>
