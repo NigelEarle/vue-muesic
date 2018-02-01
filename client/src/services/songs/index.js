@@ -1,8 +1,8 @@
 import api from '../api';
 
 export default {
-  fetchAllSongs() {
-    return api().get('songs');
+  fetchAllSongs(search = '') {
+    return api().get('songs', { params: { search } });
   },
 
   createSong(data) {
@@ -12,6 +12,7 @@ export default {
   fetchSong(id) {
     return api().get(`songs/${id}`);
   },
+
   editSong(song) {
     return api().put(`songs/${song.id}`, song);
   },

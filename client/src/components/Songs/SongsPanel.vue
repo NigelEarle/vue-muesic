@@ -63,6 +63,19 @@ export default {
     const { data } = await SongsService.fetchAllSongs();
     this.songs = data;
   },
+  watch: {
+    '$route.query.search': {
+      immediate: true,
+      async handler(value) {
+        try {
+          const { data } = await SongsService.fetchAllSongs(value);
+          this.song = data;
+        } catch (err) {
+          console.log(err);
+        }
+      },
+    },
+  },
 };
 </script>
 <style scoped>

@@ -4,9 +4,16 @@ const router = express.Router();
 
 router.route('/')
   .get(async (req, res) => {
+    const { search } = req.query;
     try {
-      const songs = await knex('songs').select('*').limit(10);
-      return res.status(200).send(songs);
+
+      if (search) {
+        // search by query string on columns and like
+        return res.status(200).send(songs);
+      } else {
+        const songs = await knex('songs').select('*').limit(10);
+        return res.status(200).send(songs);
+      }
     } catch(err) {
       return res.status(500).send(err);
     }
