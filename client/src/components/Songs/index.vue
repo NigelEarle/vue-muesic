@@ -2,7 +2,7 @@
   <v-layout cloumns>
     <v-flex xs6 offset-xs3>
       <songs-search-panel />
-      <songs-panel />
+      <songs-panel class="mt-2" />
     </v-flex>
   </v-layout>
 </template>
