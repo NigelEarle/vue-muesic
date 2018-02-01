@@ -6,12 +6,20 @@ router.route('/')
   .get(async (req, res) => {
     const { search } = req.query;
     try {
-
+      let songs = null
       if (search) {
         // search by query string on columns and like
+        songs = await knex('songs')
+        .select('*')
+        .where(function(){
+          this.where('title', 'like', `%${search}%`)
+          .orWhere('artist', 'like', `%${search}%`)
+          .orWhere('album', 'like', `%${search}%`)
+          .orWhere('genre', 'like', `%${search}%`)
+        })
         return res.status(200).send(songs);
       } else {
-        const songs = await knex('songs').select('*').limit(10);
+        songs = await knex('songs').select('*').limit(10);
         return res.status(200).send(songs);
       }
     } catch(err) {
