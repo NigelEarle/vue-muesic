@@ -30,5 +30,14 @@ router.route('/:id')
       return res.status(500).send(err);
     }
   })
+  .put(async (req, res) => {
+    const { id } = req.params;
+    try {
+      const result = await knex('songs').where('id', id).update(req.body).returning('*');
+      return res.status(200).send(result);
+    } catch (err) {
+      return res.status(500).send(err);
+    }
+  })
 
 module.exports = router;
