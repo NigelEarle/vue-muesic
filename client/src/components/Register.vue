@@ -32,7 +32,6 @@
 </style>
 <script>
 import AuthService from '@/services/auth';
-import Panel from '@/components/Panel';
 
 export default {
   name: 'Register',
@@ -54,9 +53,6 @@ export default {
         this.err = err.response.data.error;
       }
     },
-  },
-  components: {
-    Panel,
   },
 };
 </script>

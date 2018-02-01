@@ -23,7 +23,6 @@
 </template>
 <script>
 import SongsService from '@/services/songs';
-import Panel from '@/components/Panel';
 import SongMetadata from './SongMetadata';
 import YouTube from './YouTube';
 import Lyrics from './Lyrics';
@@ -41,7 +40,6 @@ export default {
     this.song = song;
   },
   components: {
-    Panel,
     SongMetadata,
     YouTube,
     Lyrics,

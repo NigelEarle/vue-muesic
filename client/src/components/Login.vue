@@ -29,7 +29,6 @@
 </style>
 <script>
 import AuthService from '@/services/auth';
-import Panel from '@/components/Panel';
 
 export default {
   name: 'Login',
@@ -52,8 +51,5 @@ export default {
       }
     },
   },
-  components: {
-    Panel
-  }
 };
 </script>

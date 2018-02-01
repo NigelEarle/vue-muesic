@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import PageHeader from '@/components/Header.vue';
+import PageHeader from '@/components/Header';
 
 export default {
   name: 'App',

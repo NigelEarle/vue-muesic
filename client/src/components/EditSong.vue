@@ -68,7 +68,6 @@
   </v-layout>
 </template>
 <script>
-import Panel from '@/components/Panel';
 import SongsService from '@/services/songs';
 
 export default {
@@ -86,9 +85,6 @@ export default {
       },
       error: null,
     };
-  },
-  components: {
-    Panel,
   },
   methods: {
     async save() {
