@@ -12,7 +12,7 @@
           type="password"
           v-model="password"
         ></v-text-field>
-        <div class="error" v-html="err"/>
+        <div class="danger-alert" v-html="err"/>
         <br>
         <v-btn class="cyan"
           @click="login">
@@ -47,7 +47,7 @@ export default {
         this.$store.dispatch('setToken', response.data.token);
         this.$store.dispatch('setUser', response.data.user);
       } catch (err) {
-        this.err = err.response.data.error;
+        this.err = err.response.data;
       }
     },
   },
