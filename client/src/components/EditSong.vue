@@ -101,8 +101,10 @@ export default {
         await SongsService.editSong(this.song);
         this.$router.push({
           name: 'songs',
-          params: {
-            songId,
+          params() {
+            return {
+              songId,
+            };
           },
         });
       } catch (err) {

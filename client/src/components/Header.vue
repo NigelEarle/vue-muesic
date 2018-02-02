@@ -1,15 +1,16 @@
 <template>
   <v-toolbar fixed class="cyan">
     <v-toolbar-title class="mr-4">
-      <span
+      <router-link
         class="home"
-        @click="navigateTo({name: 'home'})">
+        tab="span"
+        :to="{name: 'home'}">
         Vue Muesic
-      </span>
+      </router-link>
     </v-toolbar-title>
     <v-toolbar-items>
       <v-btn
-        @click="navigateTo({name: 'songs'})"
+        :to="{name: 'songs'}"
         flat
         dark>
         Browse
@@ -20,7 +21,7 @@
 
     <v-toolbar-items>
       <v-btn
-        @click="navigateTo({name: 'login'})"
+        :to="{name: 'login'}"
         v-if="!$store.state.isUserLoggedIn"
         flat
         dark>
@@ -29,7 +30,7 @@
     </v-toolbar-items>
     <v-toolbar-items>
       <v-btn
-        @click="navigateTo({name: 'register'})"
+        :to="{name: 'register'}"
         v-if="!$store.state.isUserLoggedIn"
         flat
         dark>
@@ -51,9 +52,6 @@
 
 export default {
   methods: {
-    navigateTo(route) {
-      this.$router.push(route);
-    },
     logout() {
       this.$store.dispatch('setToken', null);
       this.$store.dispatch('setUser', null);
