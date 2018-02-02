@@ -69,7 +69,7 @@ export default {
       async handler(value) {
         try {
           const { data } = await SongsService.fetchAllSongs(value);
-          this.song = data;
+          this.songs = data;
         } catch (err) {
           console.log(err);
         }
