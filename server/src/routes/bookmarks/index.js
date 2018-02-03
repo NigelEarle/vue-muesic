@@ -35,5 +35,25 @@ router.route('/')
   }
 
 })
+.post(async (req, res) => {
+  const { bookmark } = req.body;
+  try {
+    const data = await knex('bookmarks').insert(bookmark).returning('*')
+    return res.status(200).send(data);
+  } catch(err) {
+    return res.status(500).send(err);
+
+  }
+});
+
+router.delete('/:bookmarkId', async (req, res) => {
+  const { bookmarkId } = req.body;
+  try {
+    const data = await knex('bookmarks').where('id', bookmarkId).del();
+    return res.status(200).send(data);
+  } catch (err) {
+    return res.status(500).send(err);
+  }
+})
 
 module.exports = router
