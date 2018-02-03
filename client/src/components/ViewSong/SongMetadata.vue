@@ -55,7 +55,7 @@ export default {
   data() {
     return {
       isBookmarked: false,
-    }
+    };
   },
   computed: {
     ...mapState([
@@ -63,20 +63,44 @@ export default {
     ]),
   },
   async mounted() {
+    if (!this.isUserLoggedIn) {
+      return;
+    }
+
     try {
       const { data } = await BookmarkService.fetchBookmarks({
         songId: this.song.id,
         userId: this.$store.state.user.id,
       });
-      this.isBookmarked = !!data;
+      this.isBookmarked = data;
     } catch (err) {
       console.log(err);
     }
   },
   methods: {
     async bookmark() {
+      try {
+
+        await BookmarkService.postBookmark({
+          songId: this.song.id,
+          userId: this.$store.state.user.id,
+        });
+
+      } catch (err) {
+        console.log(err);
+      }
     },
     async unbookmark() {
+      try {
+
+        await BookmarkService.deleteBookmark({
+          songId: this.song.id,
+          userId: this.$store.state.user.id,
+        });
+
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
 };
