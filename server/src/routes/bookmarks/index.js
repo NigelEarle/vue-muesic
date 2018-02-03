@@ -19,7 +19,6 @@ router.route('/')
       bookmark = await knex('bookmarks').where('song_id', songId);
       return res.status(200).send(bookmark);
     }
-    console.log('HELLO')
     bookmark = await knex('bookmarks').where('song_id', songId).andWhere('user_id', userId);
     return res.status(200).send(bookmark);
   } catch(err) {
