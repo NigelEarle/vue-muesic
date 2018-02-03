@@ -2,9 +2,9 @@
   <v-toolbar fixed class="cyan">
     <v-toolbar-title class="mr-4">
       <router-link
-        class="home"
+        class="songs"
         tab="span"
-        :to="{name: 'home'}">
+        :to="{name: 'songs'}">
         Vue Muesic
       </router-link>
     </v-toolbar-title>
@@ -56,7 +56,7 @@ export default {
       this.$store.dispatch('setToken', null);
       this.$store.dispatch('setUser', null);
       this.$router.push({
-        name: 'home',
+        name: 'songs',
       });
     },
   },
