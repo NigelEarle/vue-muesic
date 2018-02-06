@@ -49,7 +49,7 @@ router.route('/')
     if (existingBookmark.length > 0) {
       return res.status(400).send('Bookmark already exists');
     }
-    
+
     const data = await knex('bookmarks').insert(saveBookmark).returning('*')
     return res.status(200).send(data);
   } catch(err) {
@@ -59,10 +59,12 @@ router.route('/')
 });
 
 router.delete('/:bookmarkId', async (req, res) => {
-  const { bookmarkId } = req.body;
+  const { bookmarkId } = req.params;
+  console.log(bookmarkId)
   try {
     const data = await knex('bookmarks').where('id', bookmarkId).del();
-    return res.status(200).send(data);
+    console.log(data)
+    return res.status(200).send('bookmark deleted');
   } catch (err) {
     return res.status(500).send(err);
   }
