@@ -36,9 +36,14 @@ router.route('/')
 
 })
 .post(async (req, res) => {
-  const { bookmark } = req.body;
+  const { bookmark: { songId, userId } } = req.body;
+
+  const saveBookmark = {
+    song_id: songId,
+    user_id: userId,
+  }
   try {
-    const data = await knex('bookmarks').insert(bookmark).returning('*')
+    const data = await knex('bookmarks').insert(saveBookmark).returning('*')
     return res.status(200).send(data);
   } catch(err) {
     return res.status(500).send(err);
