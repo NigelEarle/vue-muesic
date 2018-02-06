@@ -38,15 +38,14 @@ router.route('/')
 .post(async (req, res) => {
   const { bookmark: { songId, userId } } = req.body;
 
+  const existingBookmark = await knex('bookmarks').where('song_id', songId).andWhere('user_id', userId);
+  if (existingBookmark.length > 0) {
+    return res.status(400).send('Bookmark already exists');
+  }
+
   const saveBookmark = {
     song_id: songId,
     user_id: userId,
-  }
-
-  const existingBookmark = await knex('bookmarks').where('song_id', songId).andWhere('user_id', userId);
-
-  if (existingBookmark) {
-    return res.status(400).send('Bookmark already exists');
   }
   
   try {
