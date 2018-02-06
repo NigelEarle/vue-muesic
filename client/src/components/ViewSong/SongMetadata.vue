@@ -80,24 +80,20 @@ export default {
   methods: {
     async bookmark() {
       try {
-
         await BookmarkService.postBookmark({
           songId: this.song.id,
           userId: this.$store.state.user.id,
         });
-
       } catch (err) {
         console.log(err);
       }
     },
     async unbookmark() {
       try {
-
         await BookmarkService.deleteBookmark({
           songId: this.song.id,
           userId: this.$store.state.user.id,
         });
-
       } catch (err) {
         console.log(err);
       }
