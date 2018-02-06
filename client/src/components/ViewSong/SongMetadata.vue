@@ -54,7 +54,7 @@ export default {
   ],
   data() {
     return {
-      isBookmarked: false,
+      bookmark: null,
     };
   },
   computed: {
@@ -62,30 +62,30 @@ export default {
       'isUserLoggedIn',
     ]),
   },
-  watch: {
-    async song() {
-      if (!this.isUserLoggedIn) {
-        return;
-      }
+  async mounted() {
+    if (!this.isUserLoggedIn) {
+      return;
+    }
 
-      try {
-        const { data } = await BookmarkService.fetchBookmarks({
-          songId: this.song.id,
-          userId: this.$store.state.user.id,
-        });
-        this.bookmark = data;
-      } catch (err) {
-        console.log(err);
-      }
-    },
+    try {
+      const { data: [bookmark] } = await BookmarkService.fetchBookmarks({
+        songId: this.song.id,
+        userId: this.$store.state.user.id,
+      });
+
+      this.bookmark = bookmark;
+    } catch (err) {
+      console.log(err);
+    }
   },
   methods: {
     async setAsBookmark() {
       try {
-        this.bookmark = await BookmarkService.postBookmark({
+        const { data: [bookmark] } = await BookmarkService.postBookmark({
           songId: this.song.id,
           userId: this.$store.state.user.id,
         });
+        this.bookmark = bookmark;
       } catch (err) {
         console.log(err);
       }
