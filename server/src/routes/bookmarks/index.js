@@ -7,12 +7,23 @@ router.route('/')
   const { songId, userId } = req.query;
 
   try {
-    const bookmark = await knex('bookmarks').where('song_id', songId).andWhere('user_id', userId);
-    
-    if (bookmark.length === 0) {
-      return res.status(200).send(null);
+    console.log(songId, parseInt(userId));
+    let bookmarks = null;
+
+    if (userId && !songId) {
+      console.log('USER ID ', userId)
+      bookmarks = await knex('bookmarks').where('user_id', userId)
+      return res.status(200).send(bookmarks);
     }
-    return res.status(200).send(bookmark);
+
+    if (!userId && songId) {
+      bookmarks = await knex('bookmarks').where('song_id', songId)
+      return res.status(200).send(bookmarks);
+      
+    }
+
+    bookmarks = await knex('bookmarks').where('song_id', songId).andWhere('user_id', userId);
+    return res.status(200).send(bookmarks);
 
   } catch(err) {
     return res.status(500).send(err);
