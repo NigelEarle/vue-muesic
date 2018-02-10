@@ -11,7 +11,6 @@ router.route('/')
     let bookmarks = null;
 
     if (userId && !songId) {
-      console.log('USER ID ', userId)
       bookmarks = await knex('bookmarks').where('user_id', userId)
       return res.status(200).send(bookmarks);
     }
