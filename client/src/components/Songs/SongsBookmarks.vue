@@ -36,16 +36,7 @@ export default {
         sortBy: 'date',
         descending: true,
       },
-      bookmarks: [
-        {
-          title: 'Hello world',
-          artist: 'testing',
-        },
-        {
-          title: 'Artist',
-          artist: 'artist',
-        },
-      ],
+      bookmarks: [],
     };
   },
   computed: {
