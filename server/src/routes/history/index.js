@@ -17,11 +17,11 @@ router.route('/')
 
   })
   .post(async (req, res) => {
-    const { songId, userId } = req.body;
+    const { history: { songId, userId }} = req.body;
 
     try {
       const history = await knex('history')
-      .inserting({
+      .insert({
         song_id: songId,
         user_id: userId
       })
