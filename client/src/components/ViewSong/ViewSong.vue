@@ -24,11 +24,11 @@
 <script>
 import { mapState } from 'vuex';
 import SongsService from '@/services/songs';
+import SongHistoryService from '@/services/history';
 import SongMetadata from './SongMetadata';
 import YouTube from './YouTube';
 import Lyrics from './Lyrics';
 import Tab from './Tab';
-import SongHistoryService from '@/services/history';
 
 export default {
   data() {
@@ -49,7 +49,7 @@ export default {
     this.song = song;
 
     if (this.isUserLoggedIn) {
-      SongHistoryService.postSong({
+      await SongHistoryService.postSong({
         songId,
         userId: this.user.id,
       });

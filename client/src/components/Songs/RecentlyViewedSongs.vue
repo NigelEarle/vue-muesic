@@ -3,7 +3,7 @@
     <v-data-table
       :headers="headers"
       :pagination.sync="pagination"
-      :items="songs">
+      :items="history">
       <template slot="items" slot-scope="props">
         <td class="text-xs-right">
           {{ props.item.title }}
@@ -36,7 +36,7 @@ export default {
         sortBy: 'date',
         descending: true,
       },
-      songs: [],
+      history: [],
     };
   },
   computed: {
@@ -51,7 +51,7 @@ export default {
         userId: this.user.id,
       });
 
-      this.bookmarks = data;
+      this.history = data;
     }
   },
 };
