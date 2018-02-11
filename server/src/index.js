@@ -14,6 +14,7 @@ app.use(cors());
 app.use('/auth', require('./routes/auth'));
 app.use('/songs', require('./routes/songs'));
 app.use('/bookmarks', require('./routes/bookmarks'));
+app.use('/history', require('./routes/history'));
 
 app.listen(PORT, () => {
   `Server listening on port: ${PORT}`;
