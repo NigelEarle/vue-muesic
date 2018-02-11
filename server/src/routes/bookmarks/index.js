@@ -1,33 +1,30 @@
 const express = require('express');
 const knex = require('../../../knex/knex');
+const { isAuthenticated } = require('../../policies');
 const router = express.Router();
 
 router.route('/')
-.get(async (req, res) => {
-  const { songId, userId } = req.query;
+.get(isAuthenticated, async (req, res) => {
+  const { id } = req.user;
+  console.log('REQ USER', req.user);
+  // const { songId } = req.query;
 
-  try {
-    let bookmarks = knex('bookmarks')
+  // try {
+  //   let bookmarks = knex('bookmarks')
     
-    if (userId && !songId) {
-      bookmarks = await bookmarks
-        .innerJoin('songs', 'bookmarks.song_id', 'songs.id')
-        .where('bookmarks.user_id', userId);
-      return res.status(200).send(bookmarks);
-    }
+  //   if (id && !songId) {
+  //     bookmarks = await bookmarks
+  //       .innerJoin('songs', 'bookmarks.song_id', 'songs.id')
+  //       .where('bookmarks.user_id', id);
+  //     return res.status(200).send(bookmarks);
+  //   }
 
-    // if (!userId && songId) {
-    //   bookmarks = await knex('bookmarks').where('song_id', songId)
-    //   return res.status(200).send(bookmarks);
-      
-    // }
+  //   bookmarks = await bookmarks.where('song_id', songId).andWhere('user_id', id);
+    return res.status(200).send('bookmarks');
 
-    bookmarks = await bookmarks.where('song_id', songId).andWhere('user_id', userId);
-    return res.status(200).send(bookmarks);
-
-  } catch(err) {
-    return res.status(500).send(err);
-  }
+  // } catch(err) {
+  //   return res.status(500).send(err);
+  // }
 
 })
 .post(async (req, res) => {
