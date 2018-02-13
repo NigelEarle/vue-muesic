@@ -5,25 +5,24 @@ const router = express.Router();
 
 router.route('/')
 .get(isAuthenticated, async (req, res) => {
-  console.log('REQ USER', req.user);
-  // const { songId } = req.query;
-
-  // try {
-  //   let bookmarks = knex('bookmarks')
+  const { id } = req.user;
+  const { songId } = req.query;
+  try {
+    let bookmarks = knex('bookmarks')
     
-  //   if (id && !songId) {
-  //     bookmarks = await bookmarks
-  //       .innerJoin('songs', 'bookmarks.song_id', 'songs.id')
-  //       .where('bookmarks.user_id', id);
-  //     return res.status(200).send(bookmarks);
-  //   }
+    if (id && !songId) {
+      bookmarks = await bookmarks
+        .innerJoin('songs', 'bookmarks.song_id', 'songs.id')
+        .where('bookmarks.user_id', id);
+      return res.status(200).send(bookmarks);
+    }
 
-  //   bookmarks = await bookmarks.where('song_id', songId).andWhere('user_id', id);
+    bookmarks = await bookmarks.where('song_id', songId).andWhere('user_id', id);
     return res.status(200).send('bookmarks');
 
-  // } catch(err) {
-  //   return res.status(500).send(err);
-  // }
+  } catch(err) {
+    return res.status(500).send(err);
+  }
 
 })
 .post(async (req, res) => {

@@ -23,7 +23,7 @@ passport.use(
     secretOrKey: config.jwtSecret
   }, async (jwtPayload, done) => {
     try {
-      const user = await knex('users').where('id', jwtPayload.id);
+      const [ user ] = await knex('users').where('id', jwtPayload.id);
       if (!user) {
         return done(new Error(), null);
       }
