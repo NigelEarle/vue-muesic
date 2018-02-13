@@ -55,7 +55,13 @@ router.delete('/:bookmarkId', isAuthenticated, async (req, res) => {
   const { bookmarkId } = req.params;
 
   try {
-    await knex('bookmarks').where('id', bookmarkId).andWhere('user_id', id).del();
+    const bookmark = await knex('bookmarks').where('id', bookmarkId).andWhere('user_id', id).del();
+    
+    if (!bookmark) {
+      return res.status(403).send({
+        error: 'Access denied'
+      })
+    }
     return res.status(200).send('bookmark deleted');
   } catch (err) {
     return res.status(500).send(err);
