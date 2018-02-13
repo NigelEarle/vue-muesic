@@ -7,6 +7,7 @@ router.route('/')
 .get(isAuthenticated, async (req, res) => {
   const { id } = req.user;
   const { songId } = req.query;
+  
   try {
     let bookmarks = knex('bookmarks')
     
@@ -25,16 +26,17 @@ router.route('/')
   }
 
 })
-.post(async (req, res) => {
-  const { bookmark: { songId, userId } } = req.body;
+.post(isAuthenticated, async (req, res) => {
+  const { id } = req.user;
+  const { bookmark: { songId } } = req.body;
 
   const saveBookmark = {
     song_id: songId,
-    user_id: userId,
+    user_id: id,
   }
 
   try {
-    const existingBookmark = await knex('bookmarks').where('song_id', songId).andWhere('user_id', userId);
+    const existingBookmark = await knex('bookmarks').where('song_id', songId).andWhere('user_id', id);
     
     if (existingBookmark.length > 0) {
       return res.status(400).send('Bookmark already exists');
@@ -48,11 +50,12 @@ router.route('/')
   }
 });
 
-router.delete('/:bookmarkId', async (req, res) => {
+router.delete('/:bookmarkId', isAuthenticated, async (req, res) => {
+  const { id } = req.user;
   const { bookmarkId } = req.params;
 
   try {
-    const data = await knex('bookmarks').where('id', bookmarkId).del();
+    await knex('bookmarks').where('id', bookmarkId).andWhere('user_id', id).del();
     return res.status(200).send('bookmark deleted');
   } catch (err) {
     return res.status(500).send(err);
