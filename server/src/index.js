@@ -13,6 +13,10 @@ const PORT = 8081;
 
 const app = express();
 
+app.use(morgan('combine'));
+app.use(bodyParser.json());
+app.use(cors());
+
 passport.use(
   new JwtStrategy({
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -29,11 +33,6 @@ passport.use(
     }
   })
 );
-
-app.use(morgan('combine'));
-app.use(bodyParser.json());
-app.use(cors());
-
 
 app.use('/auth', require('./routes/auth'));
 app.use('/songs', require('./routes/songs'));

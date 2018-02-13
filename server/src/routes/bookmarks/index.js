@@ -5,7 +5,6 @@ const router = express.Router();
 
 router.route('/')
 .get(isAuthenticated, async (req, res) => {
-  const { id } = req.user;
   console.log('REQ USER', req.user);
   // const { songId } = req.query;
 
