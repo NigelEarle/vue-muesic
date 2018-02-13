@@ -60,7 +60,7 @@ export default {
   computed: {
     ...mapState([
       'isUserLoggedIn',
-      'user'
+      'user',
     ]),
   },
   async mounted() {
@@ -71,7 +71,6 @@ export default {
     try {
       const { data: [bookmark] } = await BookmarkService.fetchBookmarks({
         songId: this.song.id,
-        userId: this.user.id,
       });
 
       this.bookmark = bookmark;
