@@ -8,20 +8,21 @@ This project is my initial introduction to Vue.js - which utilizes Node.js/Expre
 
 **_Front end front end frameworks and libraries:_**
 
-- [Vue.js]()
-- [Vuex]
-- [Vuetify]
-- [Vue-router]
-- [Vue-persistedstate]
+- [Vue.js](https://vuejs.org/)
+- [Vuex](https://github.com/vuejs/vuex)
+- [Vuetify](https://vuetifyjs.com/en/)
+- [Vue-router](https://github.com/vuejs/vue-router)
+- [Vue-persistedstate](https://github.com/robinvdvleuten/vuex-persistedstate)
 
 **_Back end frameworks and libraries:_**
 
-- [Node.js]
-- [Passport.js]
-- [Knex.js]
-- [Joi]
-- [Jwt]
-- [PostgreSQL]
+- [Node.js](https://nodejs.org/en/)
+- [Express.js](https://expressjs.com/)
+- [Passport.js](http://www.passportjs.org/)
+- [Knex.js](http://knexjs.org/)
+- [Joi](https://github.com/hapijs/joi)
+- [Jwt](https://jwt.io/)
+- [PostgreSQL](https://www.postgresql.org/)
 
 ---
 
