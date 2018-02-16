@@ -4,7 +4,7 @@
 
 ---
 
-This project is my initial introduction to Vue.js - which utilizes Node.js/Express.js on the back end. S/O to @codyseibert for the awesome series!
+This project is my initial introduction to Vue.js - which utilizes Node.js/Express.js on the back end. S/O to [@codyseibert](https://github.com/codyseibert) for the awesome series!
 
 **_Front end front end frameworks and libraries:_**
 
@@ -26,4 +26,4 @@ This project is my initial introduction to Vue.js - which utilizes Node.js/Expre
 
 ---
 
-#WIP
+# WIP
